@@ -96,6 +96,15 @@ function print_help() {
     echo_color "white" "  -h, --help\t\tdisplay this help and exit\n"
 }
 
+function check_dependencies() {
+    # Check if inotifywait is installed
+    if ! command -v inotifywait &> /dev/null; then
+        echo_color "lightred" "inotifywait is not installed\n"
+        echo_color "lightred" "install inotify-tools to use this script\n"
+        exit 1
+    fi
+}
+
 function ensure_root() {
     # Ensure the script is run as root
     if [[ $EUID -ne 0 ]]; then
@@ -108,6 +117,7 @@ function ensure_root() {
 function initialize() {
     # Create the root directory and files if they don't exist
     ensure_root
+    check_dependencies
     mkdir -p "$ROOT_DIR"
     touch "$MONITOR_FILE"
     touch "$FILES_HISTORY"
