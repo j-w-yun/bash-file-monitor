@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR="/root/.monitor"
+ROOT_DIR=".monitor"
 MONITOR_FILE="$ROOT_DIR/monitors.txt"
 FILES_HISTORY="$ROOT_DIR/files_history.txt"
 COMMANDS_HISTORY="$ROOT_DIR/commands_history.txt"
@@ -116,7 +116,7 @@ function ensure_root() {
 
 function initialize() {
     # Create the root directory and files if they don't exist
-    ensure_root
+    # ensure_root
     check_dependencies
     mkdir -p "$ROOT_DIR"
     touch "$MONITOR_FILE"
